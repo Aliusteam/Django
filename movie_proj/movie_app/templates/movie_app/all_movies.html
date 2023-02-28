@@ -1,0 +1,23 @@
+{% extends 'movie_app/base.html' %}
+
+
+{% block title %} Модель {% endblock %}
+
+
+{% block content %}
+    <ul>
+        {% for movie in movies %}
+{#            <li><a href=" movie/{{ movie.id }} ">{{movie.name}}</a> , рейтинг - {{ movie.rating }}</li>#}
+{#            <li><a href=" {% url 'movie-detail' movie.id %} ">{{movie.name}}</a> , рейтинг - {{ movie.rating }}</li>#}
+            <li><a href=" {{ movie.slug_url  }}">{{movie.name}}</a> , рейтинг - {{ movie.rating }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Средний бюджет - {{ agg.budget__avg }}</h3>
+    <h3>Минимальный рейтинг - {{ agg.rating__min }}</h3>
+    <h3>Максимальный рейтинг - {{ agg.rating__max }}</h3>
+    <h3>Всего фильмов - {{ agg.id__count }}</h3>
+
+{% endblock %}
+
+
