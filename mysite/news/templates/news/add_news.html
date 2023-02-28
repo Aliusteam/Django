@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Добавление новости
+{% endblock %}
+
+{% block sidebar %}
+    {% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+    <h1>Добавление новости</h1>
+
+    <form action=" {% url 'add_news' %} " method="post">
+{#        Для защиты передаваемой информации: #}
+        {% csrf_token %}
+
+
+        {#        Вывод полей формы в одну строку - автоматический: {{ form.as_p }} #}
+        {{ form.as_p }}
+
+{#        Для отлавливания ошибок, которые вне формы: #}
+        {{ form.non_field.errors }}
+
+        {% comment %}
+        {#        Вывод полей формы  - ручной , по каждой строчке: #}
+        <div class="mb-3">
+            <label for="{{ form.title.id_for_label }}" class="form-label">Название:</label>
+            {{ form.title }}
+{#            Тут ошибки валидации#}
+            <div class="invalid-feedback">
+                {{ form.title.errors }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.content.id_for_label }}" class="form-label">Текст:</label>
+            {{ form.content }}
+
+            <div class="invalid-feedback">
+                {{ form.content.errors }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.is_published.id_for_label }}" class="form-label">Опубликовано?</label>
+            {{ form.is_published }}
+
+            <div class="invalid-feedback">
+                {{ form.is_published.errors }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.category.id_for_label }}" class="form-label">Выберите категорию:</label>
+            {{ form.category }}
+
+            <div class="invalid-feedback">
+                {{ form.category.errors }}
+            </div>
+        </div>
+        {% endcomment %}
+
+        {% comment %}
+        {#        Вывод полей формы  - полуавтоматический: #}
+        {% for field in form %}
+            <div class="form-group">
+                {{ field.label_tag }}
+                {{  field }}
+                <div class="invalid-feedback">
+                    {{ field.errors }}
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+        {% endcomment %}
+        
+        {#        Создание кнопки#}
+        <button type="submit" class="btn btn-primary btn-block">Добавить новость</button>
+    </form>
+{% endblock %}

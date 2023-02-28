@@ -1,0 +1,10 @@
+<div class="list-group">
+    {% for item in categories %}
+        <a href="{{ item.get_absolute_url }}" class="list-group-item
+        list-group-item-action">{{ item }}</a>
+
+{# Ниже это то, что мы заменили        #}
+{#        <a href="{% url 'сategory' item.pk %}" class="list-group-item#}
+{#        list-group-item-action">{{ item }}</a>#}
+    {% endfor %}
+</div>
