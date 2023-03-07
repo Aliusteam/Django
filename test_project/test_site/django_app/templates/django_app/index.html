@@ -1,0 +1,58 @@
+{% load static %}
+{% load mptt_tags %}
+
+
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+{#    <script src="http://127.0.0.1:8000/static/script.js"></script>#}
+    <script src="{% static 'script.js' %}"></script>
+    <title>Привет мир!</title>
+</head>
+<body>
+
+
+
+{#https://html5book.ru/mnogourovnevoe-vypadayushee-menu/#}
+{#<a href="" class="active">{{ node.name }}#}
+
+<nav>
+    <ul class="topmenu">
+        {% recursetree menu %}
+            <li><a href="{{ node.get_absolute_url }}">{{ node.name }}<span class="fa fa-angle-down"></span></a>
+                {% if not node.is_leaf_node %}
+                    <ul class="submenu">
+                        {% if children %}
+                            {{ children }}
+                        {% endif %}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endrecursetree %}
+    </ul>
+</nav>
+
+
+
+{% load menu_tags %}
+{#{% draw_menu 'Категория 1' %}#}
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
